@@ -1,14 +1,13 @@
-package com.wintig.RabbitMQConsumer;
+package com.wintig.rabbit;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class RabbitMqConsumerApplication {
+public class Application {
 
 	public static void main(String[] args) {
-		SpringApplication.run(RabbitMqConsumerApplication.class, args);
+		SpringApplication.run(Application.class, args);
 	}
 
 }
-
