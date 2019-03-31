@@ -14,6 +14,13 @@ import java.util.Map;
 @Component
 public class OrderReceiver {
 
+    /**
+     * @RabbitListener 消息监听，可配置交换机、队列、路由key，该注解会创建队列和交互机 并建立绑定关系
+     * @RabbitHandler 标识此方法如果有消息过来，消费者要调用这个方法
+     * @Payload 消息体
+     * @Headers 消息头
+     * @param order
+     */
     @RabbitListener(bindings = @QueueBinding(
                 value = @Queue(value = "order-queue", declare = "true"),
                 exchange = @Exchange(name = "order-exchange", durable = "true", type = "topic"),
