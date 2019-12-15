@@ -5,12 +5,13 @@ import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.stereotype.Component;
 
 @Component
-// 监听的队列名字
-@RabbitListener(queues = "q_hello")
-public class HelloReceiver {
+@RabbitListener(queues = "q_topic_message")
+public class HelloReceiver1 {
 
     @RabbitHandler
     public void process(String hello) {
-        System.out.println("Receiver  : " + hello);
+        System.out.println("Receiver1  : " + hello);
     }
+
+
 }

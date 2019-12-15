@@ -36,7 +36,7 @@ public class SendMessage {
          *
          * direct   ： 路由模式，队列可以只获取他感兴趣的内容
          * fanout   ： 接受消息，并且将它广播到所有的队列中
-         * topic    ：
+         * topic    ： 可以进行模糊匹配
          * headers  ：
          *
          */
