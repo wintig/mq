@@ -2,7 +2,7 @@ package com.wintig.rabbitmq.receive;
 
 import com.rabbitmq.client.Channel;
 import com.rabbitmq.client.Connection;
-import com.rabbitmq.client.QueueingConsumer;
+import com.rabbitmq.client.DeliverCallback;
 import com.wintig.rabbitmq.utils.ConnectionUtil;
 
 public class Receive2 {
@@ -28,18 +28,25 @@ public class Receive2 {
         channel.basicQos(1);
 
 
-        QueueingConsumer consumer = new QueueingConsumer(channel);
-        channel.basicConsume(QUEUE_NAME, false, consumer);
+        // 定义队列的消费者
+        DeliverCallback deliverCallback = (consumerTag, delivery) -> {
 
-
-        while (true) {
-            QueueingConsumer.Delivery delivery = consumer.nextDelivery();
-            String message = new String(delivery.getBody());
+            String message = new String(delivery.getBody(), "UTF-8");
             System.out.println(" [Receive2] Receive2 '" + message + "'");
-            Thread.sleep(10);
+            try {
+                Thread.sleep(10);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
 
             channel.basicAck(delivery.getEnvelope().getDeliveryTag(), false);
-        }
+
+        };
+
+
+        channel.basicConsume(QUEUE_NAME, false, deliverCallback, consumerTag -> { });
+
+
     }
 
 
